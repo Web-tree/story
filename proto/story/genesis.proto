@@ -1,0 +1,15 @@
+syntax = "proto3";
+package webtree.story.story;
+
+import "gogoproto/gogo.proto";
+import "story/params.proto";
+// this line is used by starport scaffolding # genesis/proto/import
+
+option go_package = "github.com/web-tree/story/x/story/types";
+
+// GenesisState defines the story module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+  string port_id = 2;
+  // this line is used by starport scaffolding # genesis/proto/state
+}

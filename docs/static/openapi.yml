@@ -28270,6 +28270,42 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
+  /webtree/story/story/params:
+    get:
+      summary: Parameters queries the parameters of the module.
+      operationId: WebtreeStoryStoryParams
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              params:
+                description: params holds all the parameters of this module.
+                type: object
+            description: >-
+              QueryParamsResponse is response type for the Query/Params RPC
+              method.
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
 definitions:
   cosmos.auth.v1beta1.Params:
     type: object
@@ -48466,3 +48502,13 @@ definitions:
     title: >-
       SignatureCounts contains information about signature reporting for a
       number of blocks
+  webtree.story.story.Params:
+    type: object
+    description: Params defines the parameters for the module.
+  webtree.story.story.QueryParamsResponse:
+    type: object
+    properties:
+      params:
+        description: params holds all the parameters of this module.
+        type: object
+    description: QueryParamsResponse is response type for the Query/Params RPC method.
