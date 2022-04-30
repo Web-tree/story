@@ -4,9 +4,15 @@ import { StdFee } from "@cosmjs/launchpad";
 import { SigningStargateClient } from "@cosmjs/stargate";
 import { Registry, OfflineSigner, EncodeObject, DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
+import { MsgCreateEvent } from "./types/story/tx";
+import { MsgUpdateEvent } from "./types/story/tx";
+import { MsgDeleteEvent } from "./types/story/tx";
 
 
 const types = [
+  ["/webtree.story.story.MsgCreateEvent", MsgCreateEvent],
+  ["/webtree.story.story.MsgUpdateEvent", MsgUpdateEvent],
+  ["/webtree.story.story.MsgDeleteEvent", MsgDeleteEvent],
   
 ];
 export const MissingWalletError = new Error("wallet is required");
@@ -39,6 +45,9 @@ const txClient = async (wallet: OfflineSigner, { addr: addr }: TxClientOptions =
 
   return {
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }: SignAndBroadcastOptions = {fee: defaultFee, memo: ""}) => client.signAndBroadcast(address, msgs, fee,memo),
+    msgCreateEvent: (data: MsgCreateEvent): EncodeObject => ({ typeUrl: "/webtree.story.story.MsgCreateEvent", value: MsgCreateEvent.fromPartial( data ) }),
+    msgUpdateEvent: (data: MsgUpdateEvent): EncodeObject => ({ typeUrl: "/webtree.story.story.MsgUpdateEvent", value: MsgUpdateEvent.fromPartial( data ) }),
+    msgDeleteEvent: (data: MsgDeleteEvent): EncodeObject => ({ typeUrl: "/webtree.story.story.MsgDeleteEvent", value: MsgDeleteEvent.fromPartial( data ) }),
     
   };
 };

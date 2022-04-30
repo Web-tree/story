@@ -3,6 +3,7 @@ package webtree.story.story;
 
 import "gogoproto/gogo.proto";
 import "story/params.proto";
+import "story/event.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "github.com/web-tree/story/x/story/types";
@@ -11,5 +12,7 @@ option go_package = "github.com/web-tree/story/x/story/types";
 message GenesisState {
   Params params = 1 [(gogoproto.nullable) = false];
   string port_id = 2;
+  repeated Event eventList = 3 [(gogoproto.nullable) = false];
+  uint64 eventCount = 4;
   // this line is used by starport scaffolding # genesis/proto/state
 }

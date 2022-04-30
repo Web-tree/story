@@ -1,13 +1,53 @@
 syntax = "proto3";
 package webtree.story.story;
 
+import "story/event.proto";
 // this line is used by starport scaffolding # proto/tx/import
 
 option go_package = "github.com/web-tree/story/x/story/types";
 
 // Msg defines the Msg service.
 service Msg {
-    // this line is used by starport scaffolding # proto/tx/rpc
+    rpc CreateEvent(MsgCreateEvent) returns (MsgCreateEventResponse);
+  rpc UpdateEvent(MsgUpdateEvent) returns (MsgUpdateEventResponse);
+  rpc DeleteEvent(MsgDeleteEvent) returns (MsgDeleteEventResponse);
+// this line is used by starport scaffolding # proto/tx/rpc
 }
+
+message MsgCreateEvent {
+  string creator = 1;
+  string giverId = 2;
+  string takerId = 3;
+  string giverSign = 4;
+  string takerSign = 5;
+  string unionId = 6;
+  string typeId = 7;
+  string body = 8;
+}
+
+message MsgCreateEventResponse {
+  uint64 id = 1;
+}
+
+message MsgUpdateEvent {
+  string creator = 1;
+  uint64 id = 2;
+  string giverId = 3;
+  string takerId = 4;
+  string giverSign = 5;
+  string takerSign = 6;
+  string unionId = 7;
+  string typeId = 8;
+  string body = 9;
+}
+
+message MsgUpdateEventResponse {}
+
+message MsgDeleteEvent {
+  string creator = 1;
+  uint64 id = 2;
+}
+
+message MsgDeleteEventResponse {}
 
 // this line is used by starport scaffolding # proto/tx/message

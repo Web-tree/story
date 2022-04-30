@@ -1,0 +1,16 @@
+syntax = "proto3";
+package webtree.story.story;
+
+option go_package = "github.com/web-tree/story/x/story/types";
+
+message Event {
+  uint64 id = 1;
+  string giverId = 2; 
+  string takerId = 3; 
+  string giverSign = 4; 
+  string takerSign = 5; 
+  string unionId = 6; 
+  string typeId = 7; 
+  string body = 8; 
+  string creator = 9;
+}

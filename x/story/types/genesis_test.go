@@ -22,9 +22,44 @@ func TestGenesisState_Validate(t *testing.T) {
 			desc: "valid genesis state",
 			genState: &types.GenesisState{
 				PortId: types.PortID,
+				EventList: []types.Event{
+					{
+						Id: 0,
+					},
+					{
+						Id: 1,
+					},
+				},
+				EventCount: 2,
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
+		},
+		{
+			desc: "duplicated event",
+			genState: &types.GenesisState{
+				EventList: []types.Event{
+					{
+						Id: 0,
+					},
+					{
+						Id: 0,
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "invalid event count",
+			genState: &types.GenesisState{
+				EventList: []types.Event{
+					{
+						Id: 1,
+					},
+				},
+				EventCount: 0,
+			},
+			valid: false,
 		},
 		// this line is used by starport scaffolding # types/genesis/testcase
 	} {
